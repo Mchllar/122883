@@ -3,26 +3,26 @@ package com.example.casefiles
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import android.util.Log
-import android.widget.TextView
 
-class RegisterActivity : AppCompatActivity() {
+class PoliceRegActivity : AppCompatActivity() {
 
     private lateinit var editTextEmail: EditText
-    private lateinit var editTextNationalID: EditText
+    private lateinit var editTextServiceNumber: EditText
     private lateinit var editTextPassword: EditText
     private lateinit var editTextName: EditText
     private lateinit var editTextMobile: EditText
-    private lateinit var editTextResidence: EditText
+    private lateinit var editTextStation: EditText
     private lateinit var buttonRegister: Button
     private lateinit var progressBar: ProgressBar
     private lateinit var textViewLogin: TextView
@@ -30,35 +30,23 @@ class RegisterActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var databaseReference: DatabaseReference
-
-//    override fun onStart() {
-//        super.onStart()
-//        auth = FirebaseAuth.getInstance()
-//        val currentUser = auth.currentUser
-//        if (currentUser != null) {
-//            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
-//            finish()
-//        }
-//    }
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        setContentView(R.layout.activity_police_reg)
 
         auth = FirebaseAuth.getInstance()
         databaseReference = FirebaseDatabase.getInstance().reference
 
         editTextEmail = findViewById(R.id.email)
-        editTextNationalID = findViewById(R.id.NationalID)
+        editTextServiceNumber = findViewById(R.id.serviceNumber)
         editTextPassword = findViewById(R.id.password)
         editTextName = findViewById(R.id.name)
         editTextMobile = findViewById(R.id.number)
-        editTextResidence = findViewById(R.id.residence)
+        editTextStation = findViewById(R.id.Station)
         buttonRegister = findViewById(R.id.btn_register)
         progressBar = findViewById(R.id.progressBar)
         textViewLogin = findViewById(R.id.Login)
+        buttonBack = findViewById(R.id.backButton)
         buttonBack = findViewById(R.id.backButton)
 
         textViewLogin.setOnClickListener {
@@ -69,16 +57,16 @@ class RegisterActivity : AppCompatActivity() {
 
         buttonRegister.setOnClickListener {
             val email = editTextEmail.text.toString()
-            val nationalId = editTextNationalID.text.toString()
+            val serviceNumber = editTextServiceNumber.text.toString()
             val password = editTextPassword.text.toString()
             val name = editTextName.text.toString()
             val phoneNumber = editTextMobile.text.toString()
-            val residence = editTextResidence.text.toString()
+            val station = editTextStation.text.toString()
 
-            if (email.isEmpty() || nationalId.isEmpty() || name.isEmpty() || password.isEmpty() || phoneNumber.isEmpty() || residence.isEmpty()) {
+            if (email.isEmpty() || serviceNumber.isEmpty() || name.isEmpty() || password.isEmpty() || phoneNumber.isEmpty() || station.isEmpty()) {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             } else {
-                registerUser(email, password, name, nationalId, phoneNumber, residence)
+                registerUser(email, password, name, serviceNumber, phoneNumber, station)
             }
         }
 
@@ -90,7 +78,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun registerUser(email: String, password: String, name: String, nationalId: String, phoneNumber: String, residence: String) {
+    private fun registerUser(email: String, password: String, name: String, serviceNumber: String, phoneNumber: String, station: String) {
         progressBar.visibility = View.VISIBLE
 
         auth.createUserWithEmailAndPassword(email, password)
@@ -109,19 +97,19 @@ class RegisterActivity : AppCompatActivity() {
                                     .addOnCompleteListener { verificationTask ->
                                         if (verificationTask.isSuccessful) {
                                             // Save user details in the Realtime Database
-                                            saveUserDetails(name, nationalId, phoneNumber, residence)
+                                            saveUserDetails(name, serviceNumber, phoneNumber, station)
                                             Toast.makeText(
-                                                this@RegisterActivity,
+                                                this@PoliceRegActivity,
                                                 "Registration Successful. Verification email sent. Please check your email.",
                                                 Toast.LENGTH_SHORT
                                             ).show()
-                                            val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+                                            val intent = Intent(this@PoliceRegActivity, LoginActivity::class.java)
                                             startActivity(intent)
                                             finish()
                                         } else {
                                             progressBar.visibility = View.GONE
                                             Toast.makeText(
-                                                this@RegisterActivity,
+                                                this@PoliceRegActivity,
                                                 "Failed to send verification email. Try again later.",
                                                 Toast.LENGTH_SHORT
                                             ).show()
@@ -129,29 +117,29 @@ class RegisterActivity : AppCompatActivity() {
                                     }
                             } else {
                                 progressBar.visibility = View.GONE
-                                Toast.makeText(this@RegisterActivity, "Failed to update user profile.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@PoliceRegActivity, "Failed to update user profile.", Toast.LENGTH_SHORT).show()
                             }
                         }
                 } else {
                     progressBar.visibility = View.GONE
                     val error = task.exception
                     if (error != null) {
-                        Log.e("RegisterActivity", "Registration failed: ${error.message}")
-                        Toast.makeText(this@RegisterActivity, "Registration failed: ${error.message}", Toast.LENGTH_SHORT).show()
+                        Log.e("PoliceRegActivity", "Registration failed: ${error.message}")
+                        Toast.makeText(this@PoliceRegActivity, "Registration failed: ${error.message}", Toast.LENGTH_SHORT).show()
                     } else {
-                        Toast.makeText(this@RegisterActivity, "Registration failed. Please try again later.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@PoliceRegActivity, "Registration failed. Please try again later.", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
     }
 
-    private fun saveUserDetails(name: String, nationalId: String, phoneNumber: String, residence: String) {
-        val userDetails = UserDetails(name, nationalId, phoneNumber, residence)
+    private fun saveUserDetails(name: String, serviceNumber: String, phoneNumber: String, station: String) {
+        val policeDetails = PoliceDetails(name, serviceNumber, phoneNumber, station)
         val uid = auth.currentUser?.uid
 
         if (uid != null) {
-            val userRef = databaseReference.child("users").child(uid)
-            userRef.setValue(userDetails)
+            val userRef = databaseReference.child("police").child(uid)
+            userRef.setValue(policeDetails)
         }
     }
 }

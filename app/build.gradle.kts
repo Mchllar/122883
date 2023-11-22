@@ -73,6 +73,9 @@ dependencies {
     implementation("com.google.firebase:firebase-database:20.3.0")
     implementation("com.google.firebase:firebase-database-ktx:20.3.0")
     implementation("com.google.firebase:firebase-firestore-ktx:24.9.1")
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+    implementation("com.google.firebase:firebase-storage-ktx:20.3.0")
+    // implementation("com.google.firebase:firebase-storage-ktx:20.3.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
@@ -83,17 +86,26 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
 
+
     // Import the Firebase BoM
-  implementation(platform("com.google.firebase:firebase-bom:32.4.0"))
-//
-//    // From Chat GPT
-//    // the Firebase Authentication SDK
-//    implementation ("com.google.firebase:firebase-auth:21.0.1")
-//
-//
-//
-//    // When using the BoM, don't specify versions in Firebase dependencies
-//
-//    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation ("com.google.firebase:firebase-bom:32.5.0")
+
+    // Add the core Firebase SDK (if not added already)
+    implementation ("com.google.firebase:firebase-database")
+    implementation ("com.google.firebase:firebase-storage")
+
+    // Add the Firebase Auth SDK (if needed)
+    implementation ("com.google.firebase:firebase-auth")
+
+    // Add the Firebase UI dependency for Auth (if using Firebase UI)
+    implementation ("com.firebaseui:firebase-ui-auth:8.0.0")
+
+    // Add the Glide library for image loading (if not added already)
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+
+    implementation ("org.tensorflow:tensorflow-lite:2.7.0")
+
+
 
 }

@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">CaseFiles</string>
+    <string name="login">Login</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="name">Name</string>
+    <string name="residence">Residence</string>
+    <string name="national_id">National ID</string>
+    <string name="email">Email</string>
+    <string name="register">Register</string>
+    <string name="password">Password</string>
+    <string name="loginText">Click to Login</string>
+    <string name="click_to_register">Click to Register</string>
+    <string name="logout">Logout</string>
+    <string name="hello">Karibu</string>
+    <string name="civilian">Civilian</string>
+    <string name="police">Police</string>
+    <string name="view_profile">View Profile</string>
+    <string name="report_incident">Report Incident</string>
+    <string name="check_updates">Check Updates</string>
+    <string name="view_reports">View Reports</string>
+    <string name="create_updates">Create Updates</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="resend_verification_email">Resend Verification Email</string>
+    <string name="please_pick_your_role">Please pick your role:</string>
+    <string name="proceed">Proceed</string>
+    <string name="station">Station</string>
+    <string name="service_number">Service Number</string>
+    <string name="back">Back</string>
+    <string name="backP">Back</string>
+
+
+    <string name="default_user_name">User Name</string>
+    <string name="user_name_label">Name: %s</string>
+    <string name="user_residence_label">Residence: %s</string>
+    <string name="user_national_id_label">National ID: %s</string>
+    <string name="user_phone_number_label">Phone Number: %s</string>
+    <string name="password_reset_success">Password reset email sent to %s</string>
+    <string name="password_reset_failure">Password reset email sending failed: %s</string>
+    <string name="database_error">Database error: %s</string>
+    <string name="user_station_label">Residence: %s</string>
+    <string name="user_service_number_label">National ID: %s</string>
+    <string name="submit">Submit</string>
+    <string name="add_video">Add Video</string>
+    <string name="add_image">Add Image</string>
+    <string name="description">Description</string>
+    <string name="location">Location</string>
+    <string name="date">Date</string>
+
+    <string name="stop_recording">Stop Recording</string>
+    <string name="record_video">"Record Video"</string>
+    <string name="post">Post</string>
+    <string name="information">Information</string>
+
+
+    <string name="user_details_format">National ID: %1$s\nName: %2$s</string>
+    <string name="user_phone_format">Phone: %s</string>
+    <string name="choose_image">Choose Image</string>
+    <string name="choose_video">Choose Video</string>
+
+
+</resources>

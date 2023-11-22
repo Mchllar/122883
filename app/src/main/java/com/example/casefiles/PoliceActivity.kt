@@ -1,43 +1,43 @@
 package com.example.casefiles
 
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import androidx.activity.ComponentActivity
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
-class MainActivity : ComponentActivity() {
+
+class PoliceActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private var currentUser: FirebaseUser? = null
-    private lateinit var buttonLogout: Button
-    private lateinit var viewProfile: Button
+
+    private lateinit var buttonViewProfile: Button
+    private lateinit var buttonViewIncidents: Button
+    private lateinit var buttonMakeUpdates: Button
     private lateinit var buttonReportIncident: Button
-    private lateinit var buttonViewUpdates: Button
-    private lateinit var buttonViewReports: Button
+    private lateinit var buttonViewDashboard: Button
+    private lateinit var buttonLogout: Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_police)
 
-        // Initialize Firebase
+        buttonViewProfile = findViewById(R.id.viewProfile)
+        buttonViewIncidents = findViewById(R.id.viewIncidents)
+        buttonMakeUpdates = findViewById(R.id.makeUpdates)
+        buttonReportIncident = findViewById(R.id.reportIncident)
+        buttonViewDashboard = findViewById(R.id.viewDashboard)
+        buttonLogout = findViewById(R.id.logout)
+
         FirebaseApp.initializeApp(this)
 
         auth = FirebaseAuth.getInstance()
 
         currentUser = auth.currentUser
-
-        buttonLogout = findViewById(R.id.logout)
-        viewProfile = findViewById(R.id.viewProfile)
-        buttonReportIncident = findViewById(R.id.reportIncident)
-        buttonViewUpdates = findViewById(R.id.viewUpdates)
-        buttonViewReports = findViewById(R.id.viewReport)
-
-
 
         if(currentUser == null){
             val intent = Intent(this, LoginActivity::class.java)
@@ -45,18 +45,16 @@ class MainActivity : ComponentActivity() {
             finish()
         }
 
-
         buttonLogout.setOnClickListener{
             FirebaseAuth.getInstance().signOut()
 
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
-
         }
 
-        viewProfile.setOnClickListener{
-            val intent = Intent(this, ViewProfileActivity::class.java)
+        buttonViewProfile.setOnClickListener{
+            val intent = Intent(this, PoliceProfileActivity::class.java)
             startActivity(intent)
             finish()
 
@@ -69,21 +67,24 @@ class MainActivity : ComponentActivity() {
 
         }
 
-        buttonViewUpdates.setOnClickListener{
-            val intent = Intent(this, CheckUpdatesActivity::class.java)
+        buttonViewIncidents.setOnClickListener{
+            val intent = Intent(this, ViewHistoryIncidentsActivity::class.java)
+            startActivity(intent)
+            finish()
+
+        }
+
+        buttonMakeUpdates.setOnClickListener{
+            val intent = Intent(this, CreateUpdatesActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        buttonViewReports.setOnClickListener{
-            val intent = Intent(this, ViewReportsActivity::class.java)
+        buttonViewDashboard.setOnClickListener{
+            val intent = Intent(this, DashboardActivity::class.java)
             startActivity(intent)
             finish()
 
-
         }
-
-
-
     }
 }

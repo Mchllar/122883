@@ -84,18 +84,7 @@
         android:layout_height="wrap_content"/>
   </com.google.android.material.textfield.TextInputLayout>
 
-  <RadioButton
-      android:id="@+id/civilianRadioButton"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="@string/civilian"
-      android:checked="true" />
 
-  <RadioButton
-      android:id="@+id/policeRadioButton"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="@string/police" />
 
   <ProgressBar
        android:layout_width="wrap_content"
@@ -118,6 +107,14 @@
       android:textSize="20sp"
       android:textStyle="italic"
       android:layout_marginTop="20dp"
+      />
+
+  <Button
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text= "@string/back"
+      android:id="@+id/backButton"
+      android:layout_marginTop="16dp"
       />
 
 

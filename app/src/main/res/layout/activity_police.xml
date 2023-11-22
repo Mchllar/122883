@@ -8,7 +8,7 @@
     android:background="@drawable/background"
     android:gravity="center"
     android:padding="15dp"
-    tools:context=".MainActivity">
+    tools:context=".PoliceActivity">
 
     <TextView
         android:id="@+id/welcome"
@@ -21,22 +21,44 @@
         android:layout_marginTop="20dp" />
 
     <!-- First Row -->
-
-    <!-- Second Row -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:orientation="horizontal"
-        >
+        android:gravity="center">
 
         <Button
             android:id="@+id/viewProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button"
+            android:text="@string/view_profile"
+            android:layout_margin="10dp" />
+
+        <Button
+            android:id="@+id/viewIncidents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/rounded_button"
-            android:text="@string/view_profile" />
+            android:text="@string/view_reports" />
+    </LinearLayout>
+
+    <!-- Second Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
+
+        <Button
+            android:id="@+id/makeUpdates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/rounded_button"
+            android:text="@string/create_updates" />
 
         <Button
             android:id="@+id/reportIncident"
@@ -47,6 +69,7 @@
             android:text="@string/report_incident" />
     </LinearLayout>
 
+    <!-- Third Row -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -55,20 +78,12 @@
         android:layout_marginTop="10dp">
 
         <Button
-            android:id="@+id/viewUpdates"
+            android:id="@+id/viewDashboard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:background="@drawable/rounded_button"
-            android:text="@string/check_updates"
-            android:layout_margin="10dp" />
-
-        <Button
-            android:id="@+id/viewReport"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_button"
-            android:text="@string/view_reports"
-            android:layout_margin="10dp" />
+            android:text="@string/dashboard" />
     </LinearLayout>
 
     <!-- Logout Button -->
@@ -76,10 +91,10 @@
         android:id="@+id/logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/rounded_button"
+        android:text="@string/logout"
         android:layout_gravity="end"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/rounded_button"
-        android:text="@string/logout" />
+        android:layout_marginEnd="10dp" />
 
 </LinearLayout>
