@@ -56,6 +56,10 @@
     <string name="user_phone_format">Phone: %s</string>
     <string name="choose_image">Choose Image</string>
     <string name="choose_video">Choose Video</string>
+    <string name="find">Find</string>
+    <string name="crime_details">Crime Details</string>
+    <string name="reporter_details">Reporter Details</string>
+    <string name="predict">Predict</string>
 
 
 </resources>
